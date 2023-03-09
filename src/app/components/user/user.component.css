@@ -1,0 +1,12 @@
+th{
+    font-size: 20px;
+    
+}
+td{
+    height: 5rem;
+    width: 7rem;
+}
+
+mat-form-field{
+    width: 29rem;
+}

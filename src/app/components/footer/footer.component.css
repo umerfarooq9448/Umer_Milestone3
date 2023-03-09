@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    background-color: lightgray;
+    
+    border-style: solid;
+    
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    
+}
+

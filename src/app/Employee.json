@@ -1,0 +1,32 @@
+{
+  "Employee": [
+    {
+      "id": 2,
+      "Name": "Md. Ismail",
+      "Address": "Ub City",
+      "Phone": 9856743210,
+      "Country": "United States"
+    },
+    {
+      "id": 3,
+      "Name": "Shraddha",
+      "Address": "Ub City",
+      "Phone": 9856743210,
+      "Country": "United States"
+    },
+    {
+      "id": 4,
+      "Name": "Sumanth",
+      "Address": "Ub City",
+      "Phone": 1234567890,
+      "Country": "United States"
+    },
+    {
+      "id": 5,
+      "Name": "Umer",
+      "Address": "Ub",
+      "Phone": 857486747,
+      "Country": "India"
+    }
+  ]
+}

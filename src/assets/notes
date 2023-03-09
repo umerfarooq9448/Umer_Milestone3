@@ -1,0 +1,10 @@
+1. create an angular project named Milestone3
+2. create a Json file for employee add all the required fields
+3. configure the json server and watch the employee json file
+4. create a service layer and implement all the service methods given in the problem statement
+5. create components as mentioned in the problem statement
+6. call out the service in the component using dependency injection
+7. implement the logical methods in order to communicate with the front end
+8. create a directive "custome Directive " that will hold the color which can be reused
+9. design your admin html
+10. created a route in navbar to admin and user

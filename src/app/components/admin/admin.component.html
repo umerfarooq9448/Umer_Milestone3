@@ -1,0 +1,264 @@
+<div class="container mt-5" style=" width:fit-content; justify-content: space-around;" >
+    <div style="display: flex; justify-content: space-between;">
+    <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input  matInput (keyup)="applyFilter($event)" placeholder="Ex. Umer" #input>
+      </mat-form-field>
+      <button style="height: fit-content;" mat-raised-button color="primary" data-toggle="modal" data-target="#addEmployee">Add Employee</button>
+    </div> 
+        
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+      
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header appCustomDirective > ID </th>
+            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header appColor appCustomDirective> Name </th>
+            <td mat-cell *matCellDef="let row"> {{row.Name}} </td>
+            
+          </ng-container>
+      
+          <!-- address Column -->
+          <ng-container matColumnDef="Address">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header appColor appCustomDirective> Address </th>
+            <td mat-cell *matCellDef="let row"> {{row.Address}} </td>
+          </ng-container>
+      
+          <!-- phone Column -->
+          <ng-container matColumnDef="Phone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header appColor appCustomDirective> Phone </th>
+            <td mat-cell *matCellDef="let row"> {{row.Phone}} </td>
+          </ng-container>
+
+          <!--country column-->
+          <ng-container matColumnDef="Country">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header appColor appCustomDirective> Country </th>
+            <td mat-cell *matCellDef="let row"> {{row.Country}} </td>
+          </ng-container>
+    
+          <!-- operation Column -->
+          <ng-container matColumnDef="Operations">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header appCustomDirective> Operations </th>
+            <td mat-cell *matCellDef="let row">
+              <button (click)="deleteEmployee(row)" mat-icon-button color="warn" aria-label="Example icon button with a delete icon" >
+              <i class="fa fa-trash"></i>
+            </button>
+            <button (click)="getEmployee(row)"  mat-icon-button color="primary" aria-label="Example icon button with a open in new tab icon" data-toggle="modal" data-target="#updateEmployee">
+                 <i class="fa fa-pencil" aria-hidden="true"></i>
+              </button>
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+          </tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      </div>
+      
+    </div>
+
+
+      <!-- Update Employee model
+      <!-- Modal -->
+      <div class="modal fade" id="updateEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Employee</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               
+                    <div>
+                      <form #updateEmployeedetails="ngForm" (ngSubmit)="updateEmployee()">
+                          <div class="row">
+                              <div class="col-md-6" >
+                                  <div class="example-container" >
+          
+                                      <mat-form-field appearance="fill" style="width: 29rem">
+                                        <mat-label>Enter Name</mat-label>
+                                        <input matInput  [formControl]="name" required [(ngModel)] =employee.Name value="{{tempemp.Name}}">
+                                        <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+                                      </mat-form-field>
+                                      
+                                      
+                                    </div>
+                                    <div class="example-container">
+          
+                                      <mat-form-field appearance="fill">
+                                        <mat-label>Enter Address</mat-label>
+                                        <input matInput type="text" [formControl]="address" required [(ngModel)] =employee.Address value="{{tempemp.Address}}">
+                                        <mat-error *ngIf="address.invalid">{{getErrorMessage()}}</mat-error>
+                                      </mat-form-field>
+                                      
+                                      
+                                    </div>
+                                    <div class="example-container">
+          
+                                      <mat-form-field appearance="fill">
+                                        <mat-label>Enter Phone</mat-label>
+                                        <input matInput type="number"  [formControl]="phone" required [(ngModel)] =employee.Phone value="{{tempemp.Phone}}" >
+                                        <mat-error *ngIf="phone.invalid">{{getErrorMessage()}}</mat-error>
+                                      </mat-form-field>
+                                      
+                                      
+                                      
+                                      
+                                    </div>
+                                    <div class="example-container">
+          
+                                        <mat-form-field appearance="fill">
+                                          <mat-label>Enter Country</mat-label>
+                                          <input matInput type="text"  [formControl]="country" required [(ngModel)] =employee.Country value="{{tempemp.Country}}" >
+                                          <mat-error *ngIf="country.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                        
+                                        
+                                        
+                                        
+                                      </div>
+                                    
+                              </div>
+                              
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary" >Submit</button>
+                            </div>
+                      </form>
+                      
+                    </div>
+                  
+            </div>
+           
+          </div>
+        </div>
+      </div>
+ 
+    
+
+
+
+      
+    
+    
+    
+    
+      <!--add Employee model-->
+      <!-- Modal -->
+      <div class="modal fade" id="addEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div>
+                <form #addEmployeedetails="ngForm" (ngSubmit)="addEmployee()">
+                    <div class="row">
+                        <div class="col-md-6" >
+                            <div class="example-container" >
+    
+                                <mat-form-field appearance="fill" style="width: 29rem">
+                                  <mat-label>Enter Name</mat-label>
+                                  <input matInput  [formControl]="name" required [(ngModel)] =employee.Name >
+                                  <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+                                </mat-form-field>
+                                
+                                
+                              </div>
+                              <div class="example-container">
+    
+                                <mat-form-field appearance="fill">
+                                  <mat-label>Enter Address</mat-label>
+                                  <input matInput type="text" [formControl]="address" required [(ngModel)] =employee.Address>
+                                  <mat-error *ngIf="address.invalid">{{getErrorMessage()}}</mat-error>
+                                </mat-form-field>
+                                
+                                
+                              </div>
+                              <div class="example-container">
+    
+                                <mat-form-field appearance="fill">
+                                  <mat-label>Enter Phone</mat-label>
+                                  <input matInput type="number"  [formControl]="phone" required [(ngModel)] =employee.Phone>
+                                  <mat-error *ngIf="phone.invalid">{{getErrorMessage()}}</mat-error>
+                                </mat-form-field>
+                                
+                                
+                                
+                                
+                              </div>
+                              <div class="example-container">
+    
+                                <mat-form-field appearance="fill">
+                                  <mat-label>Enter Country</mat-label>
+                                  <input matInput type="text"  [formControl]="country" required [(ngModel)] =employee.Country>
+                                  <mat-error *ngIf="country.invalid">{{getErrorMessage()}}</mat-error>
+                                </mat-form-field>
+                                
+                                
+                                
+                                
+                              </div>
+                              
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" >Submit</button>
+                      </div>
+                </form>
+                
+              </div>
+            </div> 
+            
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+      
